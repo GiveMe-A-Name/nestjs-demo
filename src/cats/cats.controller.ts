@@ -1,7 +1,9 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseFilters } from '@nestjs/common';
 import { CatsService } from './cats.service';
+import { HttpExceptionFilter } from './filter/http-exception.filter';
 
 @Controller('cats')
+@UseFilters(HttpExceptionFilter)
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
   @Post()
@@ -16,6 +18,6 @@ export class CatsController {
 
   @Get(':id')
   findOne(@Param('id') id: number) {
-    return this.findOne(id);
+    return this.catsService.findOne(id);
   }
 }
