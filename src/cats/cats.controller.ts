@@ -5,7 +5,6 @@ import {
   Param,
   ParseIntPipe,
   Post,
-  SetMetadata,
   UseFilters,
 } from '@nestjs/common';
 import { CatsService } from './cats.service';
