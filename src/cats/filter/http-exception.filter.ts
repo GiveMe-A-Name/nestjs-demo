@@ -21,12 +21,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
-
+    console.log('hello filter');
     const status = exception.getStatus();
     response.status(status).json({
       statusCode: status,
       url: request.url,
       timestamp: new Date().toISOString(),
+      method: request.method,
+      message: exception.message,
     });
   }
 }
