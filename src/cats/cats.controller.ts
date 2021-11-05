@@ -6,15 +6,18 @@ import {
   ParseIntPipe,
   Post,
   UseFilters,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './create-cat.dto';
 import { Roles } from './decorator/roles.decorator';
 import { HttpExceptionFilter } from './filter/http-exception.filter';
+import { LoggingInterceptor } from './interceptor/logging.interceptor';
 import { ValidatePipe } from './pipe/validate.pipe';
 
 @Controller('cats')
 @UseFilters(HttpExceptionFilter)
+@UseInterceptors(LoggingInterceptor)
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
