@@ -13,6 +13,7 @@ import { CreateCatDto } from './create-cat.dto';
 import { Roles } from './decorator/roles.decorator';
 import { HttpExceptionFilter } from './filter/http-exception.filter';
 import { LoggingInterceptor } from './interceptor/logging.interceptor';
+import { TransformInterceptor } from './interceptor/transform.interceptor';
 import { ValidatePipe } from './pipe/validate.pipe';
 
 @Controller('cats')
@@ -28,6 +29,7 @@ export class CatsController {
   }
 
   @Get()
+  @UseInterceptors(TransformInterceptor)
   findAll() {
     return this.catsService.findAll();
   }
